@@ -24,13 +24,8 @@ for (let i = 0; i < pokemonList.length; i++) {
   let pokemon = pokemonList[i];
   let output = pokemon.name + " (height: " + pokemon.height + ")";
 
-// Check if the Pokémon is super tall
 
-if (pokemon.height > 10) {
-  output += " - Wow, that’s big!";
-}
-
-// Display the Pokémon on the page
+// Add the styled "Wow, that's big!" if height > 10
 
 if (pokemon.height > 10) {
   output += ' <span class="wow-tag">- Wow, that’s big!</span>';
