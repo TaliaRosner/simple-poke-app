@@ -43,25 +43,33 @@ let pokemonRepository = (function () {
     });
   }
 
+  function showDetails(pokemon) {
+    console.log(pokemon);
+  }
+
+  function addClickListener(button, pokemon) {
+    button.addEventListener("click", function () {
+      showDetails(pokemon);
+    });
+  }
+
   function addListItem(pokemon) {
-    let pokemonListElement = document.querySelector('.pokemon-list');
-    let listItem = document.createElement('li');
-    let button = document.createElement('button');
+    let pokemonListElement = document.querySelector(".pokemon-list");
+    let listItem = document.createElement("li");
+    let button = document.createElement("button");
 
     button.innerText = pokemon.name;
 
     if (pokemon.height > 10) {
-      button.innerText += ' – Wow, that’s big!';
-      button.classList.add('wow-tag');
+      button.innerText += " – Wow, that’s big!";
+      button.classList.add("wow-tag");
     }
 
-    button.classList.add('pokemon-button');
+    button.classList.add("pokemon-button");
     listItem.appendChild(button);
     pokemonListElement.appendChild(listItem);
 
-    button.addEventListener('click', function () {
-      console.log(pokemon.name + ' is ' + pokemon.height + ' meters tall!');
-    });
+    addClickListener(button, pokemon);
   }
 
   return {
