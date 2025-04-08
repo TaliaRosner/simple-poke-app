@@ -1,5 +1,4 @@
 // Array of Pokémon with name and height
-
 let pokemonRepository = (function () {
   let pokemonList = [
     {
@@ -34,7 +33,6 @@ let pokemonRepository = (function () {
     }
   }
 
-
   function getAll() {
     return pokemonList;
   }
@@ -45,29 +43,36 @@ let pokemonRepository = (function () {
     });
   }
 
+  function addListItem(pokemon) {
+    let pokemonListElement = document.querySelector('.pokemon-list');
+    let listItem = document.createElement('li');
+    let button = document.createElement('button');
+
+    button.innerText = pokemon.name;
+
+    if (pokemon.height > 10) {
+      button.innerText += ' – Wow, that’s big!';
+      button.classList.add('wow-tag');
+    }
+
+    button.classList.add('pokemon-button');
+    listItem.appendChild(button);
+    pokemonListElement.appendChild(listItem);
+
+    button.addEventListener('click', function () {
+      console.log(pokemon.name + ' is ' + pokemon.height + ' meters tall!');
+    });
+  }
+
   return {
     add: add,
     getAll: getAll,
-    findByName: findByName
+    findByName: findByName,
+    addListItem: addListItem
   };
 })();
 
-
 // Loop through each Pokémon in the array
 pokemonRepository.getAll().forEach(function (pokemon) {
-  let pokemonListElement = document.querySelector('.pokemon-list');
-  let listItem = document.createElement('li');
-  let button = document.createElement('button');
-
-  button.innerText = pokemon.name;
-
-  // Add the styled "Wow, that's big!" if height > 10
-  if (pokemon.height > 10) {
-    button.innerText += ' – Wow, that’s big!';
-    button.classList.add('wow-tag');
-  }
-
-  button.classList.add('pokemon-button');
-  listItem.appendChild(button);
-  pokemonListElement.appendChild(listItem);
+  pokemonRepository.addListItem(pokemon);
 });
