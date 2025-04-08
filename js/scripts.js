@@ -1,5 +1,5 @@
 // Array of Pokémon with name and height
- 
+
 let pokemonList = [
   {
     name: "Lunala",
@@ -20,16 +20,15 @@ let pokemonList = [
 
 // Loop through each Pokémon in the array
 
-for (let i = 0; i < pokemonList.length; i++) {
-  let pokemon = pokemonList[i];
+pokemonList.forEach(function(pokemon) {
   let output = pokemon.name + " (height: " + pokemon.height + ")";
 
 
-// Add the styled "Wow, that's big!" if height > 10
+  // Add the styled "Wow, that's big!" if height > 10
 
-if (pokemon.height > 10) {
-  output += ' <span class="wow-tag">- Wow, that’s big!</span>';
-}
+  if (pokemon.height > 10) {
+    output += ' <span class="wow-tag">- Wow, that’s big!</span>';
+  }
 
-document.write("<p>" + output + "</p>");
-}
+  document.write("<p>" + output + "</p>");
+});
