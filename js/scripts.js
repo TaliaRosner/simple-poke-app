@@ -100,7 +100,9 @@ let pokemonRepository = (function () {
     let loadingMessage = document.createElement("p");
     loadingMessage.innerText = "Loading...";
     loadingMessage.classList.add("loading-message");
-    document.body.appendChild(loadingMessage);
+
+    let container = document.querySelector(".loading-container");
+    container.appendChild(loadingMessage);
   }
 
   function hideLoadingMessage() {
