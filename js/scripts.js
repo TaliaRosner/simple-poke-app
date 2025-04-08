@@ -53,17 +53,21 @@ let pokemonRepository = (function () {
 })();
 
 
-  // Loop through each Pokémon in the array
+// Loop through each Pokémon in the array
+pokemonRepository.getAll().forEach(function (pokemon) {
+  let pokemonListElement = document.querySelector('.pokemon-list');
+  let listItem = document.createElement('li');
+  let button = document.createElement('button');
 
-  pokemonRepository.getAll().forEach(function (pokemon) {
-    let output = pokemon.name + " (height: " + pokemon.height + ")";
+  button.innerText = pokemon.name;
 
+  // Add the styled "Wow, that's big!" if height > 10
+  if (pokemon.height > 10) {
+    button.innerText += ' – Wow, that’s big!';
+    button.classList.add('wow-tag');
+  }
 
-    // Add the styled "Wow, that's big!" if height > 10
-
-    if (pokemon.height > 10) {
-      output += ' <span class="wow-tag">- Wow, that’s big!</span>';
-    }
-
-    document.write("<p>" + output + "</p>");
-  });
+  button.classList.add('pokemon-button');
+  listItem.appendChild(button);
+  pokemonListElement.appendChild(listItem);
+});
