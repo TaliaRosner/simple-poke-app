@@ -4,18 +4,18 @@ let pokemonRepository = (function () {
     {
       name: "Lunala",
       height: 13,
-      types: ["psychic", "ghost"]
+      types: ["psychic", "ghost"],
     },
     {
       name: "Nihilego",
       height: 4,
-      types: ["rock", "poison"]
+      types: ["rock", "poison"],
     },
     {
       name: "Buzzwole",
       height: 8,
-      types: ["bug", "fighting"]
-    }
+      types: ["bug", "fighting"],
+    },
   ];
 
   function add(pokemon) {
@@ -76,7 +76,7 @@ let pokemonRepository = (function () {
     add: add,
     getAll: getAll,
     findByName: findByName,
-    addListItem: addListItem
+    addListItem: addListItem,
   };
 })();
 
