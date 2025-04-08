@@ -1,22 +1,26 @@
 // Array of Pokémon with name and height
 let pokemonRepository = (function () {
-  let pokemonList = [
-    {
-      name: "Lunala",
-      height: 13,
-      types: ["psychic", "ghost"],
-    },
-    {
-      name: "Nihilego",
-      height: 4,
-      types: ["rock", "poison"],
-    },
-    {
-      name: "Buzzwole",
-      height: 8,
-      types: ["bug", "fighting"],
-    },
-  ];
+  let pokemonList = [];
+  let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
+
+  function loadList() {
+    return fetch(apiUrl)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (json) {
+        json.results.forEach(function (item) {
+          let pokemon = {
+            name: item.name,
+            detailsUrl: item.url,
+          };
+          add(pokemon);
+        });
+      })
+      .catch(function (e) {
+        console.error(e);
+      });
+  }
 
   function add(pokemon) {
     if (
@@ -72,9 +76,27 @@ let pokemonRepository = (function () {
     addClickListener(button, pokemon);
   }
 
+  function loadDetails(item) {
+    let url = item.detailsUrl;
+    return fetch(url)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (details) {
+        item.imageUrl = details.sprites.front_default;
+        item.height = details.height;
+        item.types = details.types;
+      })
+      .catch(function (e) {
+        console.error(e);
+      });
+  }
+
   return {
     add: add,
     getAll: getAll,
+    loadList: loadList,
+    loadDetails: loadDetails,
     findByName: findByName,
     addListItem: addListItem,
   };
