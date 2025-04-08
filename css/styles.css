@@ -1,20 +1,28 @@
-.pokemon-button {
-  background-color: #f2f2f2;
-  border: 2px solid #555;
-  padding: 10px 15px;
-  margin: 5px;
-  border-radius: 6px;
-  font-size: 1em;
-  cursor: pointer;
-  transition: all 0.3s ease;
+ul.pokemon-list {
+  list-style: none;
+  padding: 0 0 0 20px; /* top right bottom left */
+  max-width: 400px;
+  margin: 0; /* removes centering */
 }
+
+.pokemon-button {
+  width: 100%;
+  margin: 6px 0;
+  padding: 10px;
+  border-radius: 6px;
+  border: 2px solid #ccc; /* <-- added this line for border */
+  background-color: #f5f5f5;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+}
+
 
 .pokemon-button:hover {
   background-color: #e0e0e0;
 }
 
 .wow-tag {
-  color: #d35400;
+  color: #e67e22;
   font-weight: bold;
 }
-  
