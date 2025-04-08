@@ -1,26 +1,42 @@
 // Array of Pokémon with name and height
 
-let pokemonList = [
-  {
-    name: "Lunala",
-    height: 13,
-    types: ["psychic", "ghost"]
-  },
-  {
-    name: "Nihilego",
-    height: 4,
-    types: ["rock", "poison"]
-  },
-  {
-    name: "Buzzwole",
-    height: 8,
-    types: ["bug", "fighting"]
+let pokemonRepository = (function () {
+  let pokemonList = [
+    {
+      name: "Lunala",
+      height: 13,
+      types: ["psychic", "ghost"]
+    },
+    {
+      name: "Nihilego",
+      height: 4,
+      types: ["rock", "poison"]
+    },
+    {
+      name: "Buzzwole",
+      height: 8,
+      types: ["bug", "fighting"]
+    }
+  ];
+
+  function add(pokemon) {
+    pokemonList.push(pokemon);
   }
-];
+
+  function getAll() {
+    return pokemonList;
+  }
+
+  return {
+    add: add,
+    getAll: getAll
+  };
+})();
+
 
 // Loop through each Pokémon in the array
 
-pokemonList.forEach(function(pokemon) {
+pokemonRepository.getAll().forEach(function (pokemon) {
   let output = pokemon.name + " (height: " + pokemon.height + ")";
 
 
