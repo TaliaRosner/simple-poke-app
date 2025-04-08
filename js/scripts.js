@@ -20,8 +20,20 @@ let pokemonRepository = (function () {
   ];
 
   function add(pokemon) {
-    pokemonList.push(pokemon);
+    if (
+      typeof pokemon === "object" &&
+      pokemon !== null &&
+      Object.keys(pokemon).length === 3 &&
+      "name" in pokemon &&
+      "height" in pokemon &&
+      "types" in pokemon
+    ) {
+      pokemonList.push(pokemon);
+    } else {
+      console.log("Invalid Pokémon! Not added.");
+    }
   }
+
 
   function getAll() {
     return pokemonList;
