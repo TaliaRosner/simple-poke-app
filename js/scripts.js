@@ -26,10 +26,8 @@ let pokemonRepository = (function () {
     if (
       typeof pokemon === "object" &&
       pokemon !== null &&
-      Object.keys(pokemon).length === 3 &&
       "name" in pokemon &&
-      "height" in pokemon &&
-      "types" in pokemon
+      "detailsUrl" in pokemon
     ) {
       pokemonList.push(pokemon);
     } else {
@@ -103,6 +101,9 @@ let pokemonRepository = (function () {
 })();
 
 // Loop through each Pokémon in the array
-pokemonRepository.getAll().forEach(function (pokemon) {
-  pokemonRepository.addListItem(pokemon);
+pokemonRepository.loadList().then(function () {
+  // Now the data is loaded!
+  pokemonRepository.getAll().forEach(function (pokemon) {
+    pokemonRepository.addListItem(pokemon);
+  });
 });
