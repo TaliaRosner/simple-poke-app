@@ -50,6 +50,7 @@ let pokemonRepository = (function () {
     getAll: getAll,
     findByName: findByName
   };
+})();
 
 
   // Loop through each Pokémon in the array
