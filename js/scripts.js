@@ -39,24 +39,30 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
-  return {
-    add: add,
-    getAll: getAll
-  };
-})();
-
-
-// Loop through each Pokémon in the array
-
-pokemonRepository.getAll().forEach(function (pokemon) {
-  let output = pokemon.name + " (height: " + pokemon.height + ")";
-
-
-  // Add the styled "Wow, that's big!" if height > 10
-
-  if (pokemon.height > 10) {
-    output += ' <span class="wow-tag">- Wow, that’s big!</span>';
+  function findByName(name) {
+    return pokemonList.filter(function (pokemon) {
+      return pokemon.name.toLowerCase() === name.toLowerCase();
+    });
   }
 
-  document.write("<p>" + output + "</p>");
-});
+  return {
+    add: add,
+    getAll: getAll,
+    findByName: findByName
+  };
+
+
+  // Loop through each Pokémon in the array
+
+  pokemonRepository.getAll().forEach(function (pokemon) {
+    let output = pokemon.name + " (height: " + pokemon.height + ")";
+
+
+    // Add the styled "Wow, that's big!" if height > 10
+
+    if (pokemon.height > 10) {
+      output += ' <span class="wow-tag">- Wow, that’s big!</span>';
+    }
+
+    document.write("<p>" + output + "</p>");
+  });
