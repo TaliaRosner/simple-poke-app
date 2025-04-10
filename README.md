@@ -1,2 +1,3 @@
 # simple-poke-app
- A simple JavaScript Pokemon app
+
+A simple JavaScript Pokemon app

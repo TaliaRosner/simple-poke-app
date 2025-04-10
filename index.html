@@ -1,15 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simple Poke App</title>
     <link rel="stylesheet" href="css/styles.css" />
   </head>
-
   <body>
     <div class="loading-container"></div>
     <ul class="pokemon-list"></ul>
+
+    <!-- Modal container -->
+    <div class="modal hidden">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h1 class="modal-title"></h1>
+        <img class="modal-img" alt="Pokémon image" />
+        <p class="modal-height"></p>
+        <p class="modal-types"></p>
+      </div>
+    </div>
+
     <script src="js/promise-polyfill.js"></script>
     <script src="js/fetch-polyfill.js"></script>
     <script src="js/scripts.js"></script>

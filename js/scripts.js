@@ -3,6 +3,38 @@ let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
 
+  function add(pokemon) {
+    if (
+      typeof pokemon === "object" &&
+      pokemon !== null &&
+      "name" in pokemon &&
+      "detailsUrl" in pokemon
+    ) {
+      pokemonList.push(pokemon);
+    } else {
+      console.log("Invalid Pokémon! Not added.");
+    }
+  }
+
+  function getAll() {
+    return pokemonList;
+  }
+
+  function addListItem(pokemon) {
+    let pokemonListElement = document.querySelector(".pokemon-list");
+    let listItem = document.createElement("li");
+    let button = document.createElement("button");
+
+    button.innerText = pokemon.name;
+    button.classList.add("pokemon-button");
+    listItem.appendChild(button);
+    pokemonListElement.appendChild(listItem);
+
+    button.addEventListener("click", function () {
+      showDetails(pokemon);
+    });
+  }
+
   function loadList() {
     showLoadingMessage();
     return fetch(apiUrl)
@@ -25,62 +57,9 @@ let pokemonRepository = (function () {
       });
   }
 
-  function add(pokemon) {
-    if (
-      typeof pokemon === "object" &&
-      pokemon !== null &&
-      "name" in pokemon &&
-      "detailsUrl" in pokemon
-    ) {
-      pokemonList.push(pokemon);
-    } else {
-      console.log("Invalid Pokémon! Not added.");
-    }
-  }
-
-  function getAll() {
-    return pokemonList;
-  }
-
-  function findByName(name) {
-    return pokemonList.filter(function (pokemon) {
-      return pokemon.name.toLowerCase() === name.toLowerCase();
-    });
-  }
-
-  function showDetails(pokemon) {
-    console.log(pokemon);
-  }
-
-  function addClickListener(button, pokemon) {
-    button.addEventListener("click", function () {
-      showDetails(pokemon);
-    });
-  }
-
-  function addListItem(pokemon) {
-    let pokemonListElement = document.querySelector(".pokemon-list");
-    let listItem = document.createElement("li");
-    let button = document.createElement("button");
-
-    button.innerText = pokemon.name;
-
-    if (pokemon.height > 10) {
-      button.innerText += " – Wow, that’s big!";
-      button.classList.add("wow-tag");
-    }
-
-    button.classList.add("pokemon-button");
-    listItem.appendChild(button);
-    pokemonListElement.appendChild(listItem);
-
-    addClickListener(button, pokemon);
-  }
-
   function loadDetails(item) {
     showLoadingMessage();
-    let url = item.detailsUrl;
-    return fetch(url)
+    return fetch(item.detailsUrl)
       .then(function (response) {
         return response.json();
       })
@@ -96,13 +75,54 @@ let pokemonRepository = (function () {
       });
   }
 
+  function showDetails(pokemon) {
+    loadDetails(pokemon).then(function () {
+      showModal(pokemon);
+    });
+  }
+
+  function showModal(pokemon) {
+    let modal = document.querySelector(".modal");
+    let modalTitle = document.querySelector(".modal-title");
+    let modalImage = document.querySelector(".modal-img");
+    let modalHeight = document.querySelector(".modal-height");
+    let modalTypes = document.querySelector(".modal-types");
+
+    modalTitle.innerText = pokemon.name;
+    modalImage.src = pokemon.imageUrl;
+    modalImage.alt = pokemon.name;
+    modalHeight.innerText = `Height: ${pokemon.height}`;
+    modalTypes.innerText = `Types: ${pokemon.types
+      .map((type) => type.type.name)
+      .join(", ")}`;
+
+    modal.classList.remove("hidden");
+  }
+
+  function hideModal() {
+    let modal = document.querySelector(".modal");
+    modal.classList.add("hidden");
+  }
+
+  window.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      hideModal();
+    }
+  });
+
+  document.querySelector(".modal-close").addEventListener("click", hideModal);
+
+  document.querySelector(".modal").addEventListener("click", function (event) {
+    if (event.target === document.querySelector(".modal")) {
+      hideModal();
+    }
+  });
+
   function showLoadingMessage() {
     let loadingMessage = document.createElement("p");
     loadingMessage.innerText = "Loading...";
     loadingMessage.classList.add("loading-message");
-
-    let container = document.querySelector(".loading-container");
-    container.appendChild(loadingMessage);
+    document.body.appendChild(loadingMessage);
   }
 
   function hideLoadingMessage() {
@@ -115,16 +135,13 @@ let pokemonRepository = (function () {
   return {
     add: add,
     getAll: getAll,
+    addListItem: addListItem,
     loadList: loadList,
     loadDetails: loadDetails,
-    findByName: findByName,
-    addListItem: addListItem,
   };
 })();
 
-// Loop through each Pokémon in the array
 pokemonRepository.loadList().then(function () {
-  // Now the data is loaded!
   pokemonRepository.getAll().forEach(function (pokemon) {
     pokemonRepository.addListItem(pokemon);
   });
