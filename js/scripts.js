@@ -146,3 +146,28 @@ pokemonRepository.loadList().then(function () {
     pokemonRepository.addListItem(pokemon);
   });
 });
+
+// === jQuery To-Do List Test Block ===
+// === jQuery To-Do List Test Block ===
+$(document).ready(function () {
+  let list = $("#list");
+
+  // List item texts
+  let items = ["Learn jQuery ✅", "Catch Pikachu ⚡", "Feed Bulbasaur 🌱"];
+
+  items.forEach(function (text) {
+    let li = $(`<li>${text}</li>`);
+    let deleteBtn = $('<button class="delete-btn">✖</button>');
+
+    deleteBtn.on("click", function () {
+      li.remove();
+    });
+
+    li.on("click", function () {
+      li.toggleClass("done");
+    });
+
+    li.append(deleteBtn);
+    list.append(li);
+  });
+});
