@@ -96,31 +96,3 @@ ul.pokemon-list {
 .hidden {
   display: none;
 }
-
-
-/* ===== To-Do List: Completed Item Style ===== */
-.done {
-  text-decoration: line-through;
-  color: grey;
-}
-
-.done:hover {
-  text-decoration: none;
-  color: #333;
-}
-
-
-/* ===== To-Do List: Delete Button ===== */
-.delete-btn {
-  margin-left: 10px;
-  padding: 2px 6px;
-  background-color: crimson;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.delete-btn:hover {
-  background-color: darkred;
-}
