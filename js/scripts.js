@@ -78,8 +78,14 @@ let pokemonRepository = (function () {
   }
 
   function showDetails(pokemon) {
-    loadDetails(pokemon).then(function () {
-      showModal(pokemon);
+    pokemonRepository.loadDetails(pokemon).then(function () {
+      $(".modal-title").text(pokemon.name);
+      $(".modal-img").attr("src", pokemon.imageUrl);
+      $(".modal-img").attr("alt", pokemon.name);
+      $(".modal-height").text("Height: " + pokemon.height);
+      $(".modal-types").text(
+        "Types: " + pokemon.types.map((type) => type.type.name).join(", ")
+      );
     });
   }
 
@@ -100,17 +106,6 @@ let pokemonRepository = (function () {
 
     modal.classList.remove("hidden");
   }
-
-  function hideModal() {
-    let modal = document.querySelector(".modal");
-    modal.classList.add("hidden");
-  }
-
-  window.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") {
-      hideModal();
-    }
-  });
 
   function showLoadingMessage() {
     let loadingMessage = document.createElement("p");
