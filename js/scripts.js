@@ -27,6 +27,8 @@ let pokemonRepository = (function () {
 
     button.innerText = pokemon.name;
     button.classList.add("btn", "btn-primary", "btn-block", "list-group-item");
+    button.setAttribute("data-toggle", "modal");
+    button.setAttribute("data-target", "#pokemon-modal");
     listItem.appendChild(button);
     pokemonListElement.appendChild(listItem);
 
@@ -106,14 +108,6 @@ let pokemonRepository = (function () {
 
   window.addEventListener("keydown", function (event) {
     if (event.key === "Escape") {
-      hideModal();
-    }
-  });
-
-  document.querySelector(".modal-close").addEventListener("click", hideModal);
-
-  document.querySelector(".modal").addEventListener("click", function (event) {
-    if (event.target === document.querySelector(".modal")) {
       hideModal();
     }
   });
