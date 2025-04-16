@@ -18,14 +18,43 @@
     <ul class="pokemon-list list-group"></ul>
     <ol id="list"></ol>
 
-    <!-- Modal container -->
-    <div class="modal hidden">
-      <div class="modal-content">
-        <button class="modal-close">&times;</button>
-        <h1 class="modal-title"></h1>
-        <img class="modal-img" alt="Pokémon image" />
-        <p class="modal-height"></p>
-        <p class="modal-types"></p>
+    <!-- Bootstrap Modal -->
+    <div
+      class="modal fade"
+      id="pokemon-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="pokemon-modal-label"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="pokemon-modal-label">Modal title</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body text-center">
+            <img class="modal-img mb-3" alt="Pokémon image" />
+            <p class="modal-height"></p>
+            <p class="modal-types"></p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
