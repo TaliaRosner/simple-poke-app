@@ -1,18 +1,18 @@
 // Array of Pokémon with name and height
 let pokemonRepository = (function () {
   let pokemonList = [];
-  let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
   function add(pokemon) {
     if (
-      typeof pokemon === "object" &&
+      typeof pokemon === 'object' &&
       pokemon !== null &&
-      "name" in pokemon &&
-      "detailsUrl" in pokemon
+      'name' in pokemon &&
+      'detailsUrl' in pokemon
     ) {
       pokemonList.push(pokemon);
     } else {
-      console.log("Invalid Pokémon! Not added.");
+      console.log('Invalid Pokémon! Not added.');
     }
   }
 
@@ -21,18 +21,23 @@ let pokemonRepository = (function () {
   }
 
   function addListItem(pokemon) {
-    let pokemonListElement = document.querySelector(".row .pokemon-list");
-    let listItem = document.createElement("li");
-    let button = document.createElement("button");
+    let pokemonListElement = document.querySelector('.row .pokemon-list');
+    let listItem = document.createElement('li');
+    let button = document.createElement('button');
 
     button.innerText = pokemon.name;
-    button.classList.add("btn", "btn-primary", "btn-block", "list-group-item");
-    button.setAttribute("data-toggle", "modal");
-    button.setAttribute("data-target", "#pokemon-modal");
+    button.classList.add(
+      'btn',
+      'btn-block',
+      'list-group-item',
+      'pokemon-button',
+    );
+    button.setAttribute('data-toggle', 'modal');
+    button.setAttribute('data-target', '#pokemon-modal');
     listItem.appendChild(button);
     pokemonListElement.appendChild(listItem);
 
-    button.addEventListener("click", function () {
+    button.addEventListener('click', function () {
       showDetails(pokemon);
     });
   }
@@ -79,22 +84,22 @@ let pokemonRepository = (function () {
 
   function showDetails(pokemon) {
     pokemonRepository.loadDetails(pokemon).then(function () {
-      $(".modal-title").text(pokemon.name);
-      $(".modal-img").attr("src", pokemon.imageUrl);
-      $(".modal-img").attr("alt", pokemon.name);
-      $(".modal-height").text("Height: " + pokemon.height);
-      $(".modal-types").text(
-        "Types: " + pokemon.types.map((type) => type.type.name).join(", ")
+      $('.modal-title').text(pokemon.name);
+      $('.modal-img').attr('src', pokemon.imageUrl);
+      $('.modal-img').attr('alt', pokemon.name);
+      $('.modal-height').text('Height: ' + pokemon.height);
+      $('.modal-types').text(
+        'Types: ' + pokemon.types.map((type) => type.type.name).join(', '),
       );
     });
   }
 
   function showModal(pokemon) {
-    let modal = document.querySelector(".modal");
-    let modalTitle = document.querySelector(".modal-title");
-    let modalImage = document.querySelector(".modal-img");
-    let modalHeight = document.querySelector(".modal-height");
-    let modalTypes = document.querySelector(".modal-types");
+    let modal = document.querySelector('.modal');
+    let modalTitle = document.querySelector('.modal-title');
+    let modalImage = document.querySelector('.modal-img');
+    let modalHeight = document.querySelector('.modal-height');
+    let modalTypes = document.querySelector('.modal-types');
 
     modalTitle.innerText = pokemon.name;
     modalImage.src = pokemon.imageUrl;
@@ -102,20 +107,20 @@ let pokemonRepository = (function () {
     modalHeight.innerText = `Height: ${pokemon.height}`;
     modalTypes.innerText = `Types: ${pokemon.types
       .map((type) => type.type.name)
-      .join(", ")}`;
+      .join(', ')}`;
 
-    modal.classList.remove("hidden");
+    modal.classList.remove('hidden');
   }
 
   function showLoadingMessage() {
-    let loadingMessage = document.createElement("p");
-    loadingMessage.innerText = "Loading...";
-    loadingMessage.classList.add("loading-message");
+    let loadingMessage = document.createElement('p');
+    loadingMessage.innerText = 'Loading...';
+    loadingMessage.classList.add('loading-message');
     document.body.appendChild(loadingMessage);
   }
 
   function hideLoadingMessage() {
-    let message = document.querySelector(".loading-message");
+    let message = document.querySelector('.loading-message');
     if (message) {
       message.remove();
     }
