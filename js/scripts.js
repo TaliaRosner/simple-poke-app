@@ -26,12 +26,8 @@ let pokemonRepository = (function () {
     let button = document.createElement('button');
 
     button.innerText = pokemon.name;
-    button.classList.add(
-      'btn',
-      'btn-block',
-      'list-group-item',
-      'pokemon-button',
-    );
+    button.classList.add('btn', 'btn-primary', 'btn-block');
+    listItem.classList.add('list-group-item');
     button.setAttribute('data-toggle', 'modal');
     button.setAttribute('data-target', '#pokemon-modal');
     listItem.appendChild(button);
@@ -92,24 +88,6 @@ let pokemonRepository = (function () {
         'Types: ' + pokemon.types.map((type) => type.type.name).join(', '),
       );
     });
-  }
-
-  function showModal(pokemon) {
-    let modal = document.querySelector('.modal');
-    let modalTitle = document.querySelector('.modal-title');
-    let modalImage = document.querySelector('.modal-img');
-    let modalHeight = document.querySelector('.modal-height');
-    let modalTypes = document.querySelector('.modal-types');
-
-    modalTitle.innerText = pokemon.name;
-    modalImage.src = pokemon.imageUrl;
-    modalImage.alt = pokemon.name;
-    modalHeight.innerText = `Height: ${pokemon.height}`;
-    modalTypes.innerText = `Types: ${pokemon.types
-      .map((type) => type.type.name)
-      .join(', ')}`;
-
-    modal.classList.remove('hidden');
   }
 
   function showLoadingMessage() {
